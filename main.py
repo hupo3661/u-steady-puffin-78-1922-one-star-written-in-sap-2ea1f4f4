@@ -62,6 +62,13 @@ def main() -> None:
         raise SystemExit(
             f"Invalid output: contents of {path} do not match the validated review."
         )
+    expected_bytes = len(REVIEW.encode("utf-8"))
+    actual_bytes = os.path.getsize(path)
+    if actual_bytes != expected_bytes:
+        raise SystemExit(
+            f"Invalid output: {path} is {actual_bytes} bytes on disk, "
+            f"expected {expected_bytes} bytes for the validated review."
+        )
 
 
 if __name__ == "__main__":
